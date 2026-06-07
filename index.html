@@ -101,18 +101,20 @@
       text-align: left;
       white-space: nowrap;
     }
-    tbody td { padding: 11px 12px; border-bottom: 1px solid #ece6da; vertical-align: top; }
+    tbody td { padding: 14px 14px; border-bottom: 1px solid #ece6da; vertical-align: top; }
     tbody tr:hover { background: #fff8ea; }
     tbody tr.japan { background: #eef8f5; }
     tbody tr.japan:hover { background: #e3f3ee; }
-    .datetime { min-width: 128px; font-variant-numeric: tabular-nums; font-weight: 900; white-space: nowrap; }
+    .datetime { min-width: 138px; font-size: 16px; font-variant-numeric: tabular-nums; font-weight: 900; white-space: nowrap; }
     .match { min-width: 300px; font-weight: 850; }
+    .match-card { font-size: 17px; line-height: 1.35; }
     .group-badge { margin-left: 8px; color: var(--gold); font-weight: 900; }
+    .venue-line { margin-top: 6px; color: var(--muted); font-size: 12px; font-weight: 700; line-height: 1.4; }
     .broadcast { min-width: 280px; }
     .chips { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
     .chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 999px; color: #fff; font-size: 12px; font-weight: 850; white-space: nowrap; }
     .chip small { opacity: 0.88; font-size: 11px; font-weight: 750; }
-    .dazn { background: #15171b; }
+    .dazn { background: var(--teal); }
     .bsp4k { background: var(--gold); }
     .nhk { background: var(--blue); }
     .ntv { background: var(--red); }
@@ -170,7 +172,7 @@
         border-radius: 8px;
         background: var(--paper);
         box-shadow: 0 10px 28px rgba(32, 29, 23, 0.1);
-        padding: 10px 12px;
+        padding: 14px 14px;
       }
       tbody tr:hover {
         background: var(--paper);
@@ -192,17 +194,26 @@
       }
       .datetime {
         color: var(--muted);
-        font-size: 13px;
+        font-size: 15px;
+        margin-bottom: 8px;
       }
       .match {
-        font-size: 17px;
         line-height: 1.45;
+        margin-bottom: 10px;
+      }
+      .match-card {
+        font-size: 18px;
+      }
+      .venue-line {
+        margin-top: 7px;
+        font-size: 12px;
       }
       .group-badge {
         margin-left: 6px;
       }
       .chips {
         min-width: 0;
+        gap: 7px;
       }
       .empty {
         border: 1px solid var(--line);
@@ -309,7 +320,7 @@
     }
 
     function groupBadge(group) {
-      return group ? `<span class="group-badge">${escapeHtml(group)}</span>` : '';
+      return group ? `<span class="group-badge">${escapeHtml(group)}組</span>` : '';
     }
 
     function escapeHtml(value) {
@@ -353,7 +364,7 @@
       els.rows.innerHTML = filtered.map((m) => `
         <tr class="${m.isJapan ? 'japan' : ''}">
           <td class="datetime">${escapeHtml(m.dateLabel)} ${escapeHtml(m.time)}</td>
-          <td class="match">${escapeHtml(m.match)}${groupBadge(m.group)}</td>
+          <td class="match"><div class="match-card">${escapeHtml(m.match)}${groupBadge(m.group)}</div><div class="venue-line">${escapeHtml(m.venue)}</div></td>
           <td class="broadcast"><div class="chips">${m.providers.map(chip).join('')}</div></td>
         </tr>
       `).join('');
