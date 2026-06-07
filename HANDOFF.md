@@ -22,6 +22,7 @@
   - Includes description/canonical/Open Graph/Twitter summary metadata.
   - Uses a responsive card-style layout for match rows below 720px viewport width.
   - Hides the top broadcaster-count summary cards on mobile.
+  - Hides the filter/search toolbar on mobile so the page opens directly into match cards.
   - Shows a top-of-page last-updated data note.
   - Orders visible rows by Japan date at runtime: today-or-later matches first, past dates moved below.
 - `README.md`
