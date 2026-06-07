@@ -23,6 +23,7 @@
   - Uses a responsive card-style layout for match rows below 720px viewport width.
   - Hides the top broadcaster-count summary cards on mobile.
   - Shows a top-of-page last-updated data note.
+  - Orders visible rows by Japan date at runtime: today-or-later matches first, past dates moved below.
 - `README.md`
   - Short project description, public URLs, and basic publish commands.
 - `HANDOFF.md`

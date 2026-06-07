@@ -343,18 +343,40 @@
       return String(value).replace(/[&<>"]/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
     }
 
+    function todayInJapan() {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Tokyo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }).formatToParts(new Date());
+      const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+      return `${values.year}-${values.month}-${values.day}`;
+    }
+
+    function kickoffKey(match) {
+      return `${match.date}T${match.time}`;
+    }
+
+    function orderMatchesByDate(items, today = todayInJapan()) {
+      const ordered = [...items].sort((a, b) => kickoffKey(a).localeCompare(kickoffKey(b)) || a.no - b.no);
+      const upcoming = ordered.filter((m) => m.date >= today);
+      if (upcoming.length === 0) return [...ordered].reverse();
+      return [...upcoming, ...ordered.filter((m) => m.date < today)];
+    }
+
     function render() {
       const query = els.q.value.trim().toLowerCase();
       const stage = els.stage.value;
       const provider = els.provider.value;
       const japanOnly = els.japan.value === '1';
-      const filtered = matches.filter((m) => {
+      const filtered = orderMatchesByDate(matches.filter((m) => {
         if (query && !m.search.includes(query)) return false;
         if (stage && m.stage !== stage) return false;
         if (provider && !m.providers.some((p) => p.kind === provider)) return false;
         if (japanOnly && !m.isJapan) return false;
         return true;
-      });
+      }));
       els.rows.innerHTML = filtered.map((m) => `
         <tr class="${m.isJapan ? 'japan' : ''}">
           <td class="num" data-label="M">${m.no}</td>
