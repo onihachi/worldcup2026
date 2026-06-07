@@ -17,7 +17,7 @@
   - Standalone static HTML.
   - Contains all CSS, JavaScript, and match data inline.
   - Lists all 104 FIFA World Cup 2026 matches.
-  - Columns: match number, date, kickoff time in Japan, stage, group, match card, venue, broadcaster/streaming provider, notes.
+  - Visible row/card fields are condensed to date+kickoff time, match card with group suffix, and broadcaster/streaming provider chips.
   - Includes filters for search, stage, provider, and Japan matches.
   - Includes description/canonical/Open Graph/Twitter summary metadata.
   - Uses a responsive card-style layout for match rows below 720px viewport width.

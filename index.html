@@ -86,7 +86,7 @@
     button:hover { border-color: var(--teal); color: var(--teal); }
     .count { color: var(--muted); font-size: 13px; font-weight: 800; text-align: right; }
     .table-shell { overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); }
-    table { width: 100%; border-collapse: collapse; min-width: 1120px; }
+    table { width: 100%; border-collapse: collapse; min-width: 720px; }
     thead {
       position: sticky;
       top: 0;
@@ -105,14 +105,11 @@
     tbody tr:hover { background: #fff8ea; }
     tbody tr.japan { background: #eef8f5; }
     tbody tr.japan:hover { background: #e3f3ee; }
-    .num { width: 54px; color: var(--muted); font-weight: 850; }
-    .date { min-width: 98px; font-weight: 850; }
-    .time { min-width: 72px; font-variant-numeric: tabular-nums; font-weight: 900; }
-    .stage { min-width: 118px; }
-    .group { width: 60px; font-weight: 900; color: var(--gold); }
-    .match { min-width: 260px; font-weight: 850; }
-    .venue { min-width: 160px; color: var(--muted); }
-    .chips { display: flex; flex-wrap: wrap; gap: 6px; min-width: 310px; }
+    .datetime { min-width: 128px; font-variant-numeric: tabular-nums; font-weight: 900; white-space: nowrap; }
+    .match { min-width: 300px; font-weight: 850; }
+    .group-badge { margin-left: 8px; color: var(--gold); font-weight: 900; }
+    .broadcast { min-width: 280px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
     .chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 999px; color: #fff; font-size: 12px; font-weight: 850; white-space: nowrap; }
     .chip small { opacity: 0.88; font-size: 11px; font-weight: 750; }
     .dazn { background: #15171b; }
@@ -186,36 +183,26 @@
         background: #eef8f5;
       }
       tbody td {
-        display: grid;
-        grid-template-columns: 82px minmax(0, 1fr);
-        gap: 10px;
-        align-items: start;
-        padding: 7px 0;
-        border-bottom: 1px solid #ece6da;
-      }
-      tbody td:last-child {
+        padding: 0;
         border-bottom: 0;
       }
-      tbody td::before {
-        content: attr(data-label);
-        color: var(--muted);
-        font-size: 11px;
-        font-weight: 850;
-        line-height: 1.7;
-      }
-      .num, .date, .time, .stage, .group, .match, .venue {
+      .datetime, .match, .broadcast {
         width: auto;
         min-width: 0;
       }
+      .datetime {
+        color: var(--muted);
+        font-size: 13px;
+      }
       .match {
-        font-size: 16px;
+        font-size: 17px;
         line-height: 1.45;
+      }
+      .group-badge {
+        margin-left: 6px;
       }
       .chips {
         min-width: 0;
-      }
-      .notes {
-        max-width: none;
       }
       .empty {
         border: 1px solid var(--line);
@@ -292,19 +279,6 @@
 
     <section class="table-shell" aria-live="polite">
       <table>
-        <thead>
-          <tr>
-            <th>M</th>
-            <th>日付</th>
-            <th>KO</th>
-            <th>ステージ</th>
-            <th>組</th>
-            <th>カード</th>
-            <th>会場</th>
-            <th>放送局・配信サイト</th>
-            <th>メモ</th>
-          </tr>
-        </thead>
         <tbody id="rows"></tbody>
       </table>
       <div class="empty" id="empty" hidden>該当する試合がありません</div>
@@ -334,12 +308,8 @@
       return `<span class="chip ${provider.kind}">${escapeHtml(provider.label)}${time}</span>`;
     }
 
-    function notes(providers) {
-      return providers
-        .map((p) => p.note)
-        .filter(Boolean)
-        .filter((v, i, a) => a.indexOf(v) === i)
-        .join(' / ');
+    function groupBadge(group) {
+      return group ? `<span class="group-badge">${escapeHtml(group)}</span>` : '';
     }
 
     function escapeHtml(value) {
@@ -382,15 +352,9 @@
       }));
       els.rows.innerHTML = filtered.map((m) => `
         <tr class="${m.isJapan ? 'japan' : ''}">
-          <td class="num" data-label="M">${m.no}</td>
-          <td class="date" data-label="日付">${escapeHtml(m.dateLabel)}</td>
-          <td class="time" data-label="KO">${escapeHtml(m.time)}</td>
-          <td class="stage" data-label="ステージ">${escapeHtml(m.stage)}</td>
-          <td class="group" data-label="組">${escapeHtml(m.group || '-')}</td>
-          <td class="match" data-label="カード">${escapeHtml(m.match)}</td>
-          <td class="venue" data-label="会場">${escapeHtml(m.venue)}</td>
-          <td data-label="放送・配信"><div class="chips">${m.providers.map(chip).join('')}</div></td>
-          <td class="notes" data-label="メモ">${escapeHtml(notes(m.providers))}</td>
+          <td class="datetime">${escapeHtml(m.dateLabel)} ${escapeHtml(m.time)}</td>
+          <td class="match">${escapeHtml(m.match)}${groupBadge(m.group)}</td>
+          <td class="broadcast"><div class="chips">${m.providers.map(chip).join('')}</div></td>
         </tr>
       `).join('');
       els.count.textContent = `${filtered.length} / 104試合`;
