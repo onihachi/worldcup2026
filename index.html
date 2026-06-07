@@ -4,6 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FIFAワールドカップ2026 全104試合 日本時間・放送配信一覧</title>
+  <meta name="description" content="FIFAワールドカップ2026全104試合の日本時間キックオフ、会場、放送局、配信サイトを一覧で確認できる静的ページです。" />
+  <link rel="canonical" href="https://onihachi.github.io/worldcup2026/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:site_name" content="worldcup2026" />
+  <meta property="og:title" content="FIFAワールドカップ2026 全104試合 日本時間・放送配信一覧" />
+  <meta property="og:description" content="全104試合の日本時間キックオフ、会場、放送局、配信サイトを一覧で確認できます。" />
+  <meta property="og:url" content="https://onihachi.github.io/worldcup2026/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="FIFAワールドカップ2026 全104試合 日本時間・放送配信一覧" />
+  <meta name="twitter:description" content="全104試合の日本時間キックオフ、会場、放送局、配信サイトを一覧で確認できます。" />
   <style>
     :root {
       color-scheme: light;
@@ -40,6 +51,17 @@
     .metric { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); padding: 12px; box-shadow: var(--shadow); }
     .metric strong { display: block; font-size: 22px; line-height: 1; }
     .metric span { display: block; margin-top: 6px; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .data-note {
+      margin: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,253,248,0.72);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .data-note strong { color: var(--ink); }
     .toolbar {
       position: sticky;
       top: 0;
@@ -65,10 +87,12 @@
     .count { color: var(--muted); font-size: 13px; font-weight: 800; text-align: right; }
     .table-shell { overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); }
     table { width: 100%; border-collapse: collapse; min-width: 1120px; }
-    thead th {
+    thead {
       position: sticky;
-      top: 84px;
+      top: 0;
       z-index: 2;
+    }
+    thead th {
       padding: 10px 12px;
       border-bottom: 1px solid var(--line);
       background: #2b2f33;
@@ -109,7 +133,92 @@
       .toolbar { position: static; grid-template-columns: 1fr 1fr; }
       .control:first-child { grid-column: 1 / -1; }
       .count { text-align: left; }
-      thead th { top: 0; }
+      thead { top: 0; }
+    }
+    @media (max-width: 720px) {
+      .summary {
+        display: none;
+      }
+      .table-shell {
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      table {
+        min-width: 0;
+        border-collapse: separate;
+      }
+      table, thead, tbody, tr, td {
+        display: block;
+        width: 100%;
+      }
+      thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+      }
+      tbody {
+        display: grid;
+        gap: 10px;
+      }
+      tbody tr {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+        box-shadow: 0 10px 28px rgba(32, 29, 23, 0.1);
+        padding: 10px 12px;
+      }
+      tbody tr:hover {
+        background: var(--paper);
+      }
+      tbody tr.japan {
+        border-color: #9fcfc3;
+        background: #eef8f5;
+      }
+      tbody tr.japan:hover {
+        background: #eef8f5;
+      }
+      tbody td {
+        display: grid;
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 10px;
+        align-items: start;
+        padding: 7px 0;
+        border-bottom: 1px solid #ece6da;
+      }
+      tbody td:last-child {
+        border-bottom: 0;
+      }
+      tbody td::before {
+        content: attr(data-label);
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 850;
+        line-height: 1.7;
+      }
+      .num, .date, .time, .stage, .group, .match, .venue {
+        width: auto;
+        min-width: 0;
+      }
+      .match {
+        font-size: 16px;
+        line-height: 1.45;
+      }
+      .chips {
+        min-width: 0;
+      }
+      .notes {
+        max-width: none;
+      }
+      .empty {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+      }
     }
     @media (max-width: 560px) {
       .summary, .toolbar { grid-template-columns: 1fr; }
@@ -132,6 +241,7 @@
         <div class="metric"><strong>15</strong><span>日本テレビ系 生中継予定枠（準決勝は候補表示）</span></div>
         <div class="metric"><strong>10</strong><span>フジテレビ系 生中継予定枠（5枠はカード未定）</span></div>
       </div>
+      <p class="data-note"><strong>最終更新:</strong> 2026年6月7日（日本時間）。FIFA公式日程PDF、JFA、各放送局発表をもとに作成しています。地上波の未確定枠は、発表済みの範囲で候補または予定枠として表示しています。</p>
     </section>
 
     <section class="toolbar" aria-label="フィルタ">
@@ -247,15 +357,15 @@
       });
       els.rows.innerHTML = filtered.map((m) => `
         <tr class="${m.isJapan ? 'japan' : ''}">
-          <td class="num">${m.no}</td>
-          <td class="date">${escapeHtml(m.dateLabel)}</td>
-          <td class="time">${escapeHtml(m.time)}</td>
-          <td class="stage">${escapeHtml(m.stage)}</td>
-          <td class="group">${escapeHtml(m.group || '-')}</td>
-          <td class="match">${escapeHtml(m.match)}</td>
-          <td class="venue">${escapeHtml(m.venue)}</td>
-          <td><div class="chips">${m.providers.map(chip).join('')}</div></td>
-          <td class="notes">${escapeHtml(notes(m.providers))}</td>
+          <td class="num" data-label="M">${m.no}</td>
+          <td class="date" data-label="日付">${escapeHtml(m.dateLabel)}</td>
+          <td class="time" data-label="KO">${escapeHtml(m.time)}</td>
+          <td class="stage" data-label="ステージ">${escapeHtml(m.stage)}</td>
+          <td class="group" data-label="組">${escapeHtml(m.group || '-')}</td>
+          <td class="match" data-label="カード">${escapeHtml(m.match)}</td>
+          <td class="venue" data-label="会場">${escapeHtml(m.venue)}</td>
+          <td data-label="放送・配信"><div class="chips">${m.providers.map(chip).join('')}</div></td>
+          <td class="notes" data-label="メモ">${escapeHtml(notes(m.providers))}</td>
         </tr>
       `).join('');
       els.count.textContent = `${filtered.length} / 104試合`;

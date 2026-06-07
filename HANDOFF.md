@@ -19,6 +19,10 @@
   - Lists all 104 FIFA World Cup 2026 matches.
   - Columns: match number, date, kickoff time in Japan, stage, group, match card, venue, broadcaster/streaming provider, notes.
   - Includes filters for search, stage, provider, and Japan matches.
+  - Includes description/canonical/Open Graph/Twitter summary metadata.
+  - Uses a responsive card-style layout for match rows below 720px viewport width.
+  - Hides the top broadcaster-count summary cards on mobile.
+  - Shows a top-of-page last-updated data note.
 - `README.md`
   - Short project description, public URLs, and basic publish commands.
 - `HANDOFF.md`
@@ -128,7 +132,5 @@ Important interpretation:
 
 ## Suggested Next Improvements
 
-- Add Open Graph metadata for nicer social sharing.
-- Add a small "last updated" source note near the top.
-- Add mobile-friendly card view below a certain width if table scrolling feels cramped.
+- Add an `og:image` asset if richer social cards are needed.
 - Split match data into `matches.js` only if editing the inline HTML becomes annoying.
