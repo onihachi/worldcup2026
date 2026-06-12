@@ -114,6 +114,8 @@ Research used for the original page:
   - https://inside.fifa.com/organisation/news/updated-world-cup-2026-match-schedule-now-available
 - DAZN Japan rights:
   - https://dazngroup.com/press-room/251204/
+- DAZN Japan highlight listing:
+  - https://www.dazn.com/ja-JP/home
 - Dentsu release:
   - https://kyodonewsprwire.jp/prwfile/release/M101216/202512030307/_prw_PR1fl_88QT5542.pdf
 - JFA Japan match broadcast page:
@@ -124,6 +126,8 @@ Research used for the original page:
   - https://www.fujitv.co.jp/fujitv/news/20260494.html
 - NHK announcement citation:
   - https://news.mynavi.jp/article/20251204-3760153/
+- FIFA Canada vs Bosnia-Herzegovina match report:
+  - https://www.fifa.com/ja/articles/canada-bosnia-and-herzegovina-highlights-match-report-ja
 
 Important interpretation:
 
@@ -132,7 +136,8 @@ Important interpretation:
 - DAZN and NHK BS Premium 4K are shown for all 104 matches.
 - NTV semifinal coverage is represented on both M101 and M102 with the note `準決勝のいずれか一方`, because the exact semifinal slot was not fixed.
 - Fuji TV has 10 planned slots, but only 5 fixed group-stage cards were known at creation time.
-- As of the 2026-06-13 update, M1, M2, and M3 include final scores and FOX Sports YouTube highlight links.
+- As of the 2026-06-13 update, M1, M2, and M3 include final scores and DAZN Japan highlight links.
+- FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 
 ## Suggested Next Improvements
 
