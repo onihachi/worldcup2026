@@ -13,6 +13,9 @@ on:
 permissions:
   contents: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 concurrency:
   group: free-fallback-data-update
   cancel-in-progress: false
@@ -27,13 +30,13 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Pull latest main
         run: git pull --ff-only origin main
 
       - name: Apply free public data
-        run: node scripts/update-free-data.mjs
+        run: node scripts/update-free-data.mjs --skip-link-check
 
       - name: Validate static page
         run: node scripts/validate-page.mjs

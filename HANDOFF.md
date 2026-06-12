@@ -33,7 +33,7 @@
 - `scripts/update-free-data.mjs`
   - Free fallback updater for GitHub Actions.
   - Reads ESPN's public FIFA World Cup scoreboard endpoint and updates final scores by matching kickoff UTC.
-  - Applies only curated Japan-viewable highlight links from `data/highlights.json` after checking URL and thumbnail availability.
+  - Applies only curated Japan-viewable highlight links from `data/highlights.json`; local runs check URLs by default, while GitHub Actions skips link checks to avoid DAZN bot/IP blocking.
 - `scripts/validate-page.mjs`
   - Reusable static page validation used locally and in GitHub Actions.
 - `data/highlights.json`
@@ -98,6 +98,7 @@ Fallback path:
 - It uses only free public HTTP data and the standard free GitHub-hosted runner for this public repository.
 - It updates final scores from ESPN's public scoreboard endpoint.
 - It does not do open-ended AI/web research for new highlights. It only applies highlights already curated in `data/highlights.json`, which should be updated when the Mac/Codex run verifies a DAZN Japan or other Japan-viewable highlight.
+- The workflow runs `node scripts/update-free-data.mjs --skip-link-check` because DAZN can block GitHub-hosted runner link probes even when the same URL is valid in Japan/local checks.
 - It commits only when `index.html` changes.
 
 ## Verification
