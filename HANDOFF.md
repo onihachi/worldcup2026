@@ -27,9 +27,21 @@
   - Shows a top-of-page last-updated data note.
   - Keeps rows in chronological order, then scrolls the first view to the first today-or-later match so past matches are available by scrolling upward.
 - `README.md`
-  - Short project description, public URLs, and basic publish commands.
+  - Short project description, public URLs, basic publish commands, and the free update flow.
 - `HANDOFF.md`
   - This file.
+- `scripts/update-free-data.mjs`
+  - Free fallback updater for GitHub Actions.
+  - Reads ESPN's public FIFA World Cup scoreboard endpoint and updates final scores by matching kickoff UTC.
+  - Applies only curated Japan-viewable highlight links from `data/highlights.json` after checking URL and thumbnail availability.
+- `scripts/validate-page.mjs`
+  - Reusable static page validation used locally and in GitHub Actions.
+- `data/highlights.json`
+  - Small curated list of confirmed Japan-viewable highlight links for the free fallback.
+- `.github/workflows/free-fallback-update.yml`
+  - No-cost GitHub Actions fallback.
+  - Runs at 8:20, 13:10, and 19:10 JST, after the Mac-first update windows.
+  - Commits and pushes only when `index.html` has a real data change.
 
 ## Current Git State
 
@@ -64,12 +76,29 @@ After editing:
 
 ```sh
 git status --short
-git add index.html README.md HANDOFF.md
+git add index.html README.md HANDOFF.md scripts/update-free-data.mjs scripts/validate-page.mjs data/highlights.json .github/workflows/free-fallback-update.yml
 git commit -m "Update schedule"
 git push origin main
 ```
 
 GitHub Pages publishes automatically from `main`.
+
+## Free Update Workflow
+
+Primary path:
+
+- The Mac/Codex heartbeat automation runs at 7:00, 12:00, and 18:00 JST.
+- It should remain the main path because it can inspect current sources, confirm Japan-viewable highlights, update notes, validate, commit, and push.
+- If the Mac is asleep, that local heartbeat will not run until the Mac wakes.
+
+Fallback path:
+
+- GitHub Actions runs `.github/workflows/free-fallback-update.yml` at 8:20, 13:10, and 19:10 JST.
+- This is intended as insurance after the Mac-first windows, not the main updater.
+- It uses only free public HTTP data and the standard free GitHub-hosted runner for this public repository.
+- It updates final scores from ESPN's public scoreboard endpoint.
+- It does not do open-ended AI/web research for new highlights. It only applies highlights already curated in `data/highlights.json`, which should be updated when the Mac/Codex run verifies a DAZN Japan or other Japan-viewable highlight.
+- It commits only when `index.html` changes.
 
 ## Verification
 
@@ -91,6 +120,14 @@ console.log(JSON.stringify({
   last: matches.at(-1).no
 }, null, 2));
 NODE
+```
+
+Or run:
+
+```sh
+node scripts/update-free-data.mjs --dry-run
+node scripts/validate-page.mjs
+git diff --check
 ```
 
 Expected:
@@ -116,6 +153,8 @@ Research used for the original page:
   - https://dazngroup.com/press-room/251204/
 - DAZN Japan highlight listing:
   - https://www.dazn.com/ja-JP/home
+- ESPN public FIFA World Cup scoreboard endpoint:
+  - https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260611-20260720&limit=200
 - Dentsu release:
   - https://kyodonewsprwire.jp/prwfile/release/M101216/202512030307/_prw_PR1fl_88QT5542.pdf
 - JFA Japan match broadcast page:
@@ -138,6 +177,7 @@ Important interpretation:
 - Fuji TV has 10 planned slots, but only 5 fixed group-stage cards were known at creation time.
 - As of the 2026-06-13 update, M1, M2, and M3 include final scores and DAZN Japan highlight links.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
+- Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
 ## Suggested Next Improvements
 
