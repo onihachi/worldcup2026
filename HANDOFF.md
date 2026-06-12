@@ -18,13 +18,14 @@
   - Contains all CSS, JavaScript, and match data inline.
   - Lists all 104 FIFA World Cup 2026 matches.
   - Visible row/card fields are condensed to date+kickoff time, match card with group suffix, small venue text, and broadcaster/streaming provider chips.
+  - Finished matches can display a final score plus a YouTube highlight card with thumbnail and play overlay.
   - Includes filters for search, stage, provider, and Japan matches.
   - Includes description/canonical/Open Graph/Twitter summary metadata.
   - Uses a responsive card-style layout for match rows below 720px viewport width.
   - Hides the top broadcaster-count summary cards on mobile.
   - Hides the filter/search toolbar on mobile so the page opens directly into match cards.
   - Shows a top-of-page last-updated data note.
-  - Orders visible rows by Japan date at runtime: today-or-later matches first, past dates moved below.
+  - Keeps rows in chronological order, then scrolls the first view to the first today-or-later match so past matches are available by scrolling upward.
 - `README.md`
   - Short project description, public URLs, and basic publish commands.
 - `HANDOFF.md`
@@ -131,6 +132,7 @@ Important interpretation:
 - DAZN and NHK BS Premium 4K are shown for all 104 matches.
 - NTV semifinal coverage is represented on both M101 and M102 with the note `準決勝のいずれか一方`, because the exact semifinal slot was not fixed.
 - Fuji TV has 10 planned slots, but only 5 fixed group-stage cards were known at creation time.
+- As of the 2026-06-13 update, M1, M2, and M3 include final scores and FOX Sports YouTube highlight links.
 
 ## Suggested Next Improvements
 
