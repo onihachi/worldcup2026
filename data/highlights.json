@@ -1,5 +1,5 @@
 {
-  "notes": "Japan-viewable highlights that the free GitHub fallback may apply after validating the URL and thumbnail. Prefer DAZN Japan pages or DAZN Japan YouTube videos.",
+  "notes": "Japan-viewable highlights that the free GitHub fallback may apply after validating the URL and thumbnail. Prefer DAZN Japan pages, SportsNavi DAZN pages, or DAZN Japan YouTube videos.",
   "matches": {
     "1": {
       "highlight": {
@@ -23,6 +23,14 @@
         "provider": "DAZN Japan",
         "url": "https://www.dazn.com/ja-JP/home/1am26994o70id1bf0hmxy21ct9/3bo06wklaw5c74hayoeama13h",
         "thumbnail": "https://image.discovery.indazn.com/ca/v2/ca/image?id=3bo06wklaw5c74hayoeama13h_image-header_pJp_1781126112000&quality=70"
+      }
+    },
+    "4": {
+      "highlight": {
+        "title": "ハイライトを見る",
+        "provider": "スポーツナビ / DAZN",
+        "url": "https://sports.yahoo.co.jp/video/player/26512344",
+        "thumbnail": "https://yvpub-pctr.c.yimg.jp/dk/yvpub-bucket001-west/contents/yvpub-content-b16583bb7d46945b4da760ca63f79f19/images/9938189b-b652-4658-bc21-1a6a6b2e2f77.jpg"
       }
     }
   }

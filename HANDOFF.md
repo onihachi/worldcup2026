@@ -18,7 +18,7 @@
   - Contains all CSS, JavaScript, and match data inline.
   - Lists all 104 FIFA World Cup 2026 matches.
   - Visible row/card fields are condensed to date+kickoff time, match card with group suffix, small venue text, and broadcaster/streaming provider chips.
-  - Finished matches can display a final score plus a YouTube highlight card with thumbnail and play overlay.
+  - Finished matches can display a final score plus a highlight card with thumbnail and play overlay.
   - Includes filters for search, stage, provider, and Japan matches.
   - Includes description/canonical/Open Graph/Twitter summary metadata.
   - Uses a responsive card-style layout for match rows below 720px viewport width.
@@ -38,6 +38,7 @@
   - Reusable static page validation used locally and in GitHub Actions.
 - `data/highlights.json`
   - Small curated list of confirmed Japan-viewable highlight links for the free fallback.
+  - Update this whenever the Mac/Codex primary run adds a highlight to `index.html`; otherwise the GitHub fallback can add scores but cannot discover brand-new highlight videos.
 - `.github/workflows/free-fallback-update.yml`
   - No-cost GitHub Actions fallback.
   - Runs at 8:20, 13:10, and 19:10 JST, after the Mac-first update windows.
@@ -156,6 +157,8 @@ Research used for the original page:
   - https://www.dazn.com/ja-JP/home
 - ESPN public FIFA World Cup scoreboard endpoint:
   - https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260611-20260720&limit=200
+- SportsNavi DAZN highlight pages:
+  - https://sports.yahoo.co.jp/video/player/26512344
 - Dentsu release:
   - https://kyodonewsprwire.jp/prwfile/release/M101216/202512030307/_prw_PR1fl_88QT5542.pdf
 - JFA Japan match broadcast page:
@@ -177,6 +180,7 @@ Important interpretation:
 - NTV semifinal coverage is represented on both M101 and M102 with the note `準決勝のいずれか一方`, because the exact semifinal slot was not fixed.
 - Fuji TV has 10 planned slots, but only 5 fixed group-stage cards were known at creation time.
 - As of the 2026-06-13 update, M1, M2, and M3 include final scores and DAZN Japan highlight links.
+- M4 includes the final score from ESPN and a SportsNavi/DAZN Japan-viewable highlight page.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
