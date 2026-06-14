@@ -181,7 +181,7 @@ Important interpretation:
 - Fuji TV has 10 planned slots, but only 5 fixed group-stage cards were known at creation time.
 - As of the 2026-06-13 update, M1, M2, and M3 include final scores and DAZN Japan highlight links.
 - M4 includes the final score from ESPN and a SportsNavi/DAZN Japan-viewable highlight page.
-- As of the 2026-06-14 7:00 JST update, M8 includes the final score from ESPN; a Japan-viewable DAZN/SportsNavi highlight had not surfaced yet and should be rechecked around 12:00.
+- As of the 2026-06-14 late-morning JST update, M7 and M8 include final scores from ESPN and SportsNavi/DAZN Japan-viewable highlight pages.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
