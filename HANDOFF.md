@@ -163,6 +163,8 @@ Research used for the original page:
   - https://sports.yahoo.co.jp/video/player/26523828
   - https://sports.yahoo.co.jp/video/player/26520258
   - https://sports.yahoo.co.jp/video/player/26520765
+  - https://sports.yahoo.co.jp/video/player/26530908
+  - https://sports.yahoo.co.jp/video/player/26531223
 - Dentsu release:
   - https://kyodonewsprwire.jp/prwfile/release/M101216/202512030307/_prw_PR1fl_88QT5542.pdf
 - JFA Japan match broadcast page:
@@ -187,6 +189,7 @@ Important interpretation:
 - M4 includes the final score from ESPN and a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-06-14 18:00 JST update, M5 and M6 include final scores from ESPN and SportsNavi/DAZN Japan-viewable highlight pages.
 - As of the 2026-06-14 late-morning JST update, M7 and M8 include final scores from ESPN and SportsNavi/DAZN Japan-viewable highlight pages.
+- As of the 2026-06-15 7:00 JST update, M10 and M11 include final scores from ESPN and SportsNavi/DAZN Japan-viewable highlight pages.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
