@@ -34,6 +34,10 @@
   - Free fallback updater for GitHub Actions.
   - Reads ESPN's public FIFA World Cup scoreboard endpoint and updates final scores by matching kickoff UTC.
   - Applies only curated Japan-viewable highlight links from `data/highlights.json`; local runs check URLs by default, while GitHub Actions skips link checks to avoid DAZN bot/IP blocking.
+- `scripts/preflight-update-needs.mjs`
+  - Token-saving preflight for Mac/Codex heartbeat runs.
+  - Prints concise `resultUpdates`, `highlightGaps`, `unsyncedCuratedHighlights`, `inProgress`, and `recommendedAction` lines.
+  - Run this first and only do web/highlight research for listed `highlightGaps` matches.
 - `scripts/validate-page.mjs`
   - Reusable static page validation used locally and in GitHub Actions.
 - `data/highlights.json`
@@ -77,7 +81,7 @@ After editing:
 
 ```sh
 git status --short
-git add index.html README.md HANDOFF.md scripts/update-free-data.mjs scripts/validate-page.mjs data/highlights.json .github/workflows/free-fallback-update.yml
+git add index.html README.md HANDOFF.md scripts/update-free-data.mjs scripts/preflight-update-needs.mjs scripts/validate-page.mjs data/highlights.json .github/workflows/free-fallback-update.yml
 git commit -m "Update schedule"
 git push origin main
 ```
@@ -89,7 +93,11 @@ GitHub Pages publishes automatically from `main`.
 Primary path:
 
 - The Mac/Codex heartbeat automation runs at 7:00, 12:00, and 18:00 JST.
-- It should remain the main path because it can inspect current sources, confirm Japan-viewable highlights, update notes, validate, commit, and push.
+- Start with `git pull --ff-only origin main`, then `node scripts/preflight-update-needs.mjs`.
+- If `recommendedAction=NONE`, stop without web searches, validation, commits, or user notification.
+- If only result or curated-highlight updates are listed, run `node scripts/update-free-data.mjs`, validate, commit, and push without web searches.
+- Only perform web/highlight research for the exact matches listed under `highlightGaps`.
+- It should remain the main path because it can confirm Japan-viewable highlights, update notes, validate, commit, and push when the preflight says work is needed.
 - If the Mac is asleep, that local heartbeat will not run until the Mac wakes.
 
 Fallback path:
@@ -127,6 +135,7 @@ NODE
 Or run:
 
 ```sh
+node scripts/preflight-update-needs.mjs
 node scripts/update-free-data.mjs --dry-run
 node scripts/validate-page.mjs
 git diff --check
