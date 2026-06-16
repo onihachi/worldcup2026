@@ -96,6 +96,22 @@
         "url": "https://sports.yahoo.co.jp/video/player/26536455",
         "thumbnail": "https://yvpub-pctr.c.yimg.jp/dk/yvpub-bucket001-west/contents/yvpub-content-b16583bb7d46945b4da760ca63f79f19/images/251b278d-fee5-483b-a4b4-4c4d06fb1bd3.jpg"
       }
+    },
+    "14": {
+      "highlight": {
+        "title": "ハイライトを見る",
+        "provider": "スポーツナビ / DAZN",
+        "url": "https://sports.yahoo.co.jp/video/player/26545203",
+        "thumbnail": "https://yvpub-pctr.c.yimg.jp/dk/yvpub-bucket001-west/contents/yvpub-content-b16583bb7d46945b4da760ca63f79f19/images/782e9018-b3fa-4513-bc31-3f0bd7715b40.jpg"
+      }
+    },
+    "16": {
+      "highlight": {
+        "title": "ハイライトを見る",
+        "provider": "スポーツナビ / DAZN",
+        "url": "https://sports.yahoo.co.jp/video/player/26545128",
+        "thumbnail": "https://yvpub-pctr.c.yimg.jp/dk/yvpub-bucket001-west/contents/yvpub-content-b16583bb7d46945b4da760ca63f79f19/images/6c01a75b-3572-4df3-8487-3a0a7256872c.jpg"
+      }
     }
   }
 }
