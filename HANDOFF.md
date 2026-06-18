@@ -224,6 +224,7 @@ Important interpretation:
 - As of the 2026-06-18 7:00 JST update, M22 and M23 include final scores from ESPN and SportsNavi/DAZN Japan-viewable highlight pages.
 - As of the 2026-06-18 noon JST update, M21 includes a SportsNavi/DAZN Japan-viewable highlight page; M21 final score was already applied by the GitHub fallback.
 - As of the 2026-06-18 18:00 JST update, M24 includes a SportsNavi/DAZN Japan-viewable highlight page; M24 final score was already applied by the GitHub fallback.
+- As of the 2026-06-19 7:00 JST update, M25 and M26 include final scores from ESPN; no verified SportsNavi/DAZN highlight had surfaced yet.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
