@@ -344,6 +344,14 @@
         "url": "https://sports.yahoo.co.jp/video/player/26645877",
         "thumbnail": "https://yvpub-pctr.c.yimg.jp/dk/yvpub-bucket001-west/contents/yvpub-content-b16583bb7d46945b4da760ca63f79f19/images/72f990c8-27ab-4058-88af-8d0928153a53.jpg"
       }
+    },
+    "47": {
+      "highlight": {
+        "title": "ハイライトを見る",
+        "provider": "DAZN Japan YouTube",
+        "url": "https://www.youtube.com/watch?v=-4YQtF10DKI",
+        "thumbnail": "https://i.ytimg.com/vi/-4YQtF10DKI/maxresdefault.jpg"
+      }
     }
   }
 }
