@@ -1,10 +1,14 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import {
+  SCOREBOARD_URL,
+  eventCandidatesByKickoff,
+  eventForMatch,
+  scoreFromEventForMatch,
+} from './scoreboard-matching.mjs';
 
 const INDEX_PATH = new URL('../index.html', import.meta.url);
 const HIGHLIGHTS_PATH = new URL('../data/highlights.json', import.meta.url);
-const SCOREBOARD_URL = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard?dates=20260611-20260720&limit=200';
-const JST_OFFSET = '+09:00';
 
 const args = new Set(process.argv.slice(2));
 const dryRun = args.has('--dry-run');
@@ -47,25 +51,6 @@ function serializeDetails(details) {
   }
   lines.push('    }');
   return lines.join('\n');
-}
-
-function kickoffUtcKey(match) {
-  return new Date(`${match.date}T${match.time}:00${JST_OFFSET}`).toISOString().slice(0, 16);
-}
-
-function eventUtcKey(event) {
-  const competition = event.competitions?.[0];
-  return new Date(competition?.startDate || event.date).toISOString().slice(0, 16);
-}
-
-function scoreFromEvent(event) {
-  if (!event.status?.type?.completed) return null;
-  const competitors = event.competitions?.[0]?.competitors || [];
-  const home = competitors.find((competitor) => competitor.homeAway === 'home');
-  const away = competitors.find((competitor) => competitor.homeAway === 'away');
-  if (!home || !away) return null;
-  if (home.score == null || away.score == null) return null;
-  return `${home.score} - ${away.score}`;
 }
 
 async function fetchJson(url) {
@@ -141,20 +126,20 @@ const currentDetails = parseBlock(html, 'matchDetails', /const matchDetails = (\
 const details = structuredClone(currentDetails);
 
 const scoreboard = await fetchJson(SCOREBOARD_URL);
-const eventsByKickoff = new Map((scoreboard.events || []).map((event) => [eventUtcKey(event), event]));
+const eventsByKickoff = eventCandidatesByKickoff(scoreboard.events || []);
 const curatedHighlights = await loadCuratedHighlights();
 
 const updates = [];
 const missingEvents = [];
 
 for (const match of matches) {
-  const event = eventsByKickoff.get(kickoffUtcKey(match));
+  const event = eventForMatch(match, eventsByKickoff);
   if (!event) {
     missingEvents.push(match.no);
     continue;
   }
 
-  const score = scoreFromEvent(event);
+  const score = scoreFromEventForMatch(match, event);
   if (score && details[match.no]?.result?.score !== score) {
     details[match.no] = {
       ...(details[match.no] || {}),

@@ -32,7 +32,7 @@
   - This file.
 - `scripts/update-free-data.mjs`
   - Free fallback updater for GitHub Actions.
-  - Reads ESPN's public FIFA World Cup scoreboard endpoint and updates final scores by matching kickoff UTC.
+  - Reads ESPN's public FIFA World Cup scoreboard endpoint and updates final scores by matching kickoff UTC plus teams.
   - Applies only curated Japan-viewable highlight links from `data/highlights.json`; local runs check URLs by default, while GitHub Actions skips link checks to avoid DAZN bot/IP blocking.
 - `scripts/preflight-update-needs.mjs`
   - Token-saving preflight for Mac/Codex heartbeat runs.
@@ -208,6 +208,19 @@ Research used for the original page:
   - https://sports.yahoo.co.jp/video/player/26645877
   - https://sports.yahoo.co.jp/video/player/26655663
   - https://sports.yahoo.co.jp/video/player/26657361
+  - https://sports.yahoo.co.jp/video/player/26659980
+  - https://sports.yahoo.co.jp/video/player/26671674
+  - https://sports.yahoo.co.jp/video/player/26671707
+  - https://sports.yahoo.co.jp/video/player/26672583
+  - https://sports.yahoo.co.jp/video/player/26672637
+  - https://sports.yahoo.co.jp/video/player/26675265
+  - https://sports.yahoo.co.jp/video/player/26675268
+  - https://sports.yahoo.co.jp/video/player/26687859
+  - https://sports.yahoo.co.jp/video/player/26687898
+  - https://sports.yahoo.co.jp/video/player/26689182
+  - https://sports.yahoo.co.jp/video/player/26689221
+  - https://sports.yahoo.co.jp/video/player/26691498
+  - https://sports.yahoo.co.jp/video/player/26691642
 - DAZN Japan YouTube highlight pages:
   - https://www.youtube.com/watch?v=WKj3oYyMnPs
   - https://www.youtube.com/watch?v=-4YQtF10DKI
@@ -261,6 +274,7 @@ Important interpretation:
 - As of the 2026-06-23 18:00 JST update, M44 includes a SportsNavi/DAZN Japan-viewable highlight page; M44 final score was already applied by the GitHub fallback. M39 still redirects to /error/notfound and remains uncurated.
 - As of the 2026-06-24 7:00 JST update, M45 and M47 include final scores from ESPN, and M47 includes a DAZN Japan YouTube highlight clip. No verified M45 highlight had surfaced yet; M39 still redirects to /error/notfound.
 - As of the 2026-06-24 noon JST update, M45 and M46 include SportsNavi/DAZN Japan-viewable highlight pages; M46 final score was applied in this run. M39 still redirects to /error/notfound.
+- As of the 2026-06-27 repair, result matching was changed from kickoff-only to kickoff-plus-team matching. The kickoff-only map collapsed simultaneous fixtures into one ESPN event and caused wrong scores for M50, M52, M53, M55, M57, M60, and would have caused M61. M48-M60 highlights are now curated where verified; M39 still redirects to /error/notfound, and M61/M62 highlights had not surfaced yet.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
