@@ -4,6 +4,7 @@ import {
   SCOREBOARD_URL,
   eventCandidatesByKickoff,
   eventForMatch,
+  scheduledMatchNameFromEvent,
   scoreFromEventForMatch,
 } from './scoreboard-matching.mjs';
 
@@ -42,6 +43,7 @@ const scoreboard = await fetchJson(SCOREBOARD_URL);
 const eventsByKickoff = eventCandidatesByKickoff(scoreboard.events || []);
 
 const resultUpdates = [];
+const matchupUpdates = [];
 const highlightGaps = [];
 const inProgress = [];
 const unsyncedCuratedHighlights = [];
@@ -54,6 +56,13 @@ for (const match of matches) {
   const score = scoreFromEventForMatch(match, event);
   const detail = currentDetails[match.no] || {};
   const curatedHighlight = curatedHighlights[String(match.no)]?.highlight;
+
+  if (match.stage !== 'グループステージ') {
+    const scheduledMatchName = scheduledMatchNameFromEvent(event);
+    if (scheduledMatchName && match.match !== scheduledMatchName) {
+      matchupUpdates.push(matchLine(match, ` -> ${scheduledMatchName}`));
+    }
+  }
 
   if (score && detail.result?.score !== score) {
     resultUpdates.push(matchLine(match, ` -> ${score}`));
@@ -75,6 +84,8 @@ for (const match of matches) {
 console.log('Preflight update needs');
 console.log(`resultUpdates=${resultUpdates.length}`);
 for (const line of resultUpdates) console.log(`- ${line}`);
+console.log(`matchupUpdates=${matchupUpdates.length}`);
+for (const line of matchupUpdates) console.log(`- ${line}`);
 console.log(`highlightGaps=${highlightGaps.length}`);
 for (const line of highlightGaps) console.log(`- ${line}`);
 console.log(`unsyncedCuratedHighlights=${unsyncedCuratedHighlights.length}`);
@@ -82,7 +93,7 @@ for (const line of unsyncedCuratedHighlights) console.log(`- ${line}`);
 console.log(`inProgress=${inProgress.length}`);
 for (const line of inProgress.slice(0, 5)) console.log(`- ${line}`);
 
-if (!resultUpdates.length && !highlightGaps.length && !unsyncedCuratedHighlights.length) {
+if (!resultUpdates.length && !matchupUpdates.length && !highlightGaps.length && !unsyncedCuratedHighlights.length) {
   console.log('recommendedAction=NONE');
 } else if (!highlightGaps.length) {
   console.log('recommendedAction=RUN_FREE_UPDATER_ONLY');

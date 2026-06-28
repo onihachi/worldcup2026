@@ -223,6 +223,16 @@ Research used for the original page:
   - https://sports.yahoo.co.jp/video/player/26691642
   - https://sports.yahoo.co.jp/video/player/26702703
   - https://sports.yahoo.co.jp/video/player/26702706
+  - https://sports.yahoo.co.jp/video/player/26704578
+  - https://sports.yahoo.co.jp/video/player/26704584
+  - https://sports.yahoo.co.jp/video/player/26706975
+  - https://sports.yahoo.co.jp/video/player/26707059
+  - https://sports.yahoo.co.jp/video/player/26715447
+  - https://sports.yahoo.co.jp/video/player/26715483
+  - https://sports.yahoo.co.jp/video/player/26716668
+  - https://sports.yahoo.co.jp/video/player/26716671
+  - https://sports.yahoo.co.jp/video/player/26718471
+  - https://sports.yahoo.co.jp/video/player/26718591
 - DAZN Japan YouTube highlight pages:
   - https://www.youtube.com/watch?v=WKj3oYyMnPs
   - https://www.youtube.com/watch?v=-4YQtF10DKI
@@ -278,8 +288,17 @@ Important interpretation:
 - As of the 2026-06-24 noon JST update, M45 and M46 include SportsNavi/DAZN Japan-viewable highlight pages; M46 final score was applied in this run. M39 still redirects to /error/notfound.
 - As of the 2026-06-27 repair, result matching was changed from kickoff-only to kickoff-plus-team matching. The kickoff-only map collapsed simultaneous fixtures into one ESPN event and caused wrong scores for M50, M52, M53, M55, M57, M60, and would have caused M61. M48-M60 highlights are now curated where verified; M39 still redirects to /error/notfound, and M61/M62 highlights had not surfaced yet.
 - As of the 2026-06-27 noon JST update, M65 and M66 include final scores from ESPN, and M61/M62 include SportsNavi/DAZN Japan-viewable highlight pages. No verified M65/M66 highlight had surfaced yet; M39 still redirects to /error/notfound.
+- As of the 2026-06-28 knockout update, M73-M88 Round of 32 placeholders were replaced with confirmed country names from ESPN scheduled fixtures, keeping the ESPN home team on the left to preserve bracket order. M76 is now marked as a Japan match. M63-M72 include SportsNavi/DAZN Japan-viewable highlight pages. `update-free-data.mjs` can now apply future knockout matchup name updates when ESPN replaces winner placeholders with concrete teams.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
+
+## Knockout Update Plan
+
+- Round of 32 has Japanese kickoff clusters at 02:00, 04:00-06:00, 07:00-08:00, 09:00-10:30, and one 12:00 match. The best heartbeat windows are 07:00, 10:30, 13:30, 16:00, and 20:00 JST during 2026-06-29 to 2026-07-04.
+- From Round of 16 onward, most matches kick off at 01:00, 02:00, 04:00, 05:00, 06:00, 09:00, or 10:00 JST. Use 07:00, 12:00, and 18:00 JST as the normal cadence; add a 13:30 JST check on days with 09:00 or 10:00 kickoffs.
+- At each run, first apply free data. This now covers final scores and concrete knockout matchup names from ESPN when available.
+- Search highlights only for matches listed by preflight as `highlightGaps`, prioritizing SportsNavi/DAZN. Most SportsNavi highlights have appeared roughly 1-3 hours after full time, so the midday and late-afternoon checks are the most important for user-visible video updates.
+- M39 has repeatedly redirected to `/error/notfound`; do not spend broad search time on it unless a reliable source exposes a new working link.
 
 ## Suggested Next Improvements
 

@@ -4,6 +4,7 @@ import {
   SCOREBOARD_URL,
   eventCandidatesByKickoff,
   eventForMatch,
+  scheduledMatchNameFromEvent,
   scoreFromEventForMatch,
 } from './scoreboard-matching.mjs';
 
@@ -51,6 +52,14 @@ function serializeDetails(details) {
   }
   lines.push('    }');
   return lines.join('\n');
+}
+
+function serializeMatches(matches) {
+  return JSON.stringify(matches);
+}
+
+function updateSearchIndex(match) {
+  match.search = `${match.no} ${match.stage} ${match.group.toLowerCase()} ${match.match.toLowerCase()} ${match.venue}`;
 }
 
 async function fetchJson(url) {
@@ -122,6 +131,7 @@ function updateDateNotes(html) {
 
 const html = await readFile(INDEX_PATH, 'utf8');
 const matches = parseBlock(html, 'matches', /const matches = (\[[\s\S]*?\]);\n\s*const matchDetails = /);
+const nextMatches = structuredClone(matches);
 const currentDetails = parseBlock(html, 'matchDetails', /const matchDetails = (\{[\s\S]*?\n    \});\n\n    const enrichedMatches/);
 const details = structuredClone(currentDetails);
 
@@ -132,11 +142,21 @@ const curatedHighlights = await loadCuratedHighlights();
 const updates = [];
 const missingEvents = [];
 
-for (const match of matches) {
+for (const match of nextMatches) {
   const event = eventForMatch(match, eventsByKickoff);
   if (!event) {
     missingEvents.push(match.no);
     continue;
+  }
+
+  if (match.stage !== 'グループステージ') {
+    const scheduledMatchName = scheduledMatchNameFromEvent(event);
+    if (scheduledMatchName && match.match !== scheduledMatchName) {
+      match.match = scheduledMatchName;
+      match.isJapan = scheduledMatchName.includes('日本');
+      updateSearchIndex(match);
+      updates.push(`M${match.no} matchup ${scheduledMatchName}`);
+    }
   }
 
   const score = scoreFromEventForMatch(match, event);
@@ -164,6 +184,11 @@ for (const [matchNo, entry] of Object.entries(curatedHighlights)) {
 
 const nextDetailsBlock = `    const matchDetails = ${serializeDetails(details)};`;
 let nextHtml = html.replace(
+  /const matches = \[[\s\S]*?\];\n\s*const matchDetails = /,
+  `const matches = ${serializeMatches(nextMatches)};\n    const matchDetails = `,
+);
+
+nextHtml = nextHtml.replace(
   /    const matchDetails = \{[\s\S]*?\n    \};\n\n    const enrichedMatches/,
   `${nextDetailsBlock}\n\n    const enrichedMatches`,
 );

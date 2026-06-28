@@ -52,6 +52,13 @@ const TEAM_NAME_ALIASES = {
   'コロンビア': ['Colombia'],
 };
 
+const SITE_TEAM_BY_ALIAS = new Map();
+for (const [siteTeam, aliases] of Object.entries(TEAM_NAME_ALIASES)) {
+  for (const alias of [siteTeam, ...aliases]) {
+    SITE_TEAM_BY_ALIAS.set(normalizeTeamName(alias), siteTeam);
+  }
+}
+
 export function normalizeTeamName(value) {
   return String(value || '')
     .normalize('NFD')
@@ -60,6 +67,21 @@ export function normalizeTeamName(value) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
+}
+
+function isPlaceholderTeamName(value) {
+  const normalized = normalizeTeamName(value);
+  return [
+    'group',
+    'round of',
+    'winner',
+    'loser',
+    'place',
+    'third',
+    'quarterfinal',
+    'semifinal',
+    'final',
+  ].some((token) => normalized.includes(token));
 }
 
 function aliasesForSiteTeam(siteTeam) {
@@ -91,6 +113,30 @@ function competitorAliases(competitor) {
     normalizeTeamName(team.name),
     normalizeTeamName(team.abbreviation),
   ].filter(Boolean));
+}
+
+export function siteTeamNameForCompetitor(competitor) {
+  const aliases = competitorAliases(competitor);
+  for (const alias of aliases) {
+    const siteTeam = SITE_TEAM_BY_ALIAS.get(alias);
+    if (siteTeam) return siteTeam;
+  }
+  return competitor?.team?.displayName || null;
+}
+
+export function concreteSiteTeamNameForCompetitor(competitor) {
+  if (!competitor?.team?.displayName || isPlaceholderTeamName(competitor.team.displayName)) return null;
+  return siteTeamNameForCompetitor(competitor);
+}
+
+export function scheduledMatchNameFromEvent(event) {
+  const competitors = eventCompetitors(event);
+  const home = competitors.find((competitor) => competitor.homeAway === 'home');
+  const away = competitors.find((competitor) => competitor.homeAway === 'away');
+  const homeName = concreteSiteTeamNameForCompetitor(home);
+  const awayName = concreteSiteTeamNameForCompetitor(away);
+  if (!homeName || !awayName) return null;
+  return `${homeName} vs ${awayName}`;
 }
 
 function competitorForSiteTeam(event, siteTeam) {
