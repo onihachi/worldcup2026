@@ -236,14 +236,18 @@ Research used for the original page:
 - DAZN Japan YouTube highlight pages:
   - https://www.youtube.com/watch?v=WKj3oYyMnPs
   - https://www.youtube.com/watch?v=-4YQtF10DKI
+- ABEMA / DAZN highlight pages:
+  - https://abema.tv/video/episode/8yv0weg08n0m1jp8iz3x8zx0g
 - Dentsu release:
   - https://kyodonewsprwire.jp/prwfile/release/M101216/202512030307/_prw_PR1fl_88QT5542.pdf
 - JFA Japan match broadcast page:
   - https://www.jfa.jp/samuraiblue/worldcup_2026/tv.html
 - NTV broadcast schedule:
   - https://www.ntv.co.jp/FIFAworldcup2026/articles/5505vd19787pv9f0fche.html
+  - https://www.ntv.co.jp/FIFAworldcup2026/oa/
 - Fuji TV broadcast schedule:
   - https://www.fujitv.co.jp/fujitv/news/20260494.html
+  - https://www.fujitv.co.jp/sports/soccer/FIFAworldcup/
 - NHK announcement citation:
   - https://news.mynavi.jp/article/20251204-3760153/
 - FIFA Canada vs Bosnia-Herzegovina match report:
@@ -255,7 +259,8 @@ Important interpretation:
 - The current `index.html` already contains the converted Japan kickoff times.
 - DAZN and NHK BS Premium 4K are shown for all 104 matches.
 - NTV semifinal coverage is represented on both M101 and M102 with the note `準決勝のいずれか一方`, because the exact semifinal slot was not fixed.
-- Fuji TV has 10 planned slots, but only 5 fixed group-stage cards were known at creation time.
+- Fuji TV has 10 planned slots. As of 2026-06-28, 6 fixed cards are shown in `index.html`: 5 group-stage cards plus M76 Brazil vs Japan. 4 knockout-stage Fuji slots remain card-undetermined.
+- As of the 2026-06-28 broadcast recheck, M76 Brazil vs Japan includes Fuji TV from 00:50, NHK BS, and DAZN, based on the current Fuji special page and JFA Japan match broadcast page. NTV's current JSON-backed schedule still matches the existing NTV knockout slots.
 - As of the 2026-06-13 update, M1, M2, and M3 include final scores and DAZN Japan highlight links.
 - M4 includes the final score from ESPN and a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-06-14 18:00 JST update, M5 and M6 include final scores from ESPN and SportsNavi/DAZN Japan-viewable highlight pages.
@@ -289,6 +294,7 @@ Important interpretation:
 - As of the 2026-06-27 repair, result matching was changed from kickoff-only to kickoff-plus-team matching. The kickoff-only map collapsed simultaneous fixtures into one ESPN event and caused wrong scores for M50, M52, M53, M55, M57, M60, and would have caused M61. M48-M60 highlights are now curated where verified; M39 still redirects to /error/notfound, and M61/M62 highlights had not surfaced yet.
 - As of the 2026-06-27 noon JST update, M65 and M66 include final scores from ESPN, and M61/M62 include SportsNavi/DAZN Japan-viewable highlight pages. No verified M65/M66 highlight had surfaced yet; M39 still redirects to /error/notfound.
 - As of the 2026-06-28 knockout update, M73-M88 Round of 32 placeholders were replaced with confirmed country names from ESPN scheduled fixtures, keeping the ESPN home team on the left to preserve bracket order. M76 is now marked as a Japan match. M63-M72 include SportsNavi/DAZN Japan-viewable highlight pages. `update-free-data.mjs` can now apply future knockout matchup name updates when ESPN replaces winner placeholders with concrete teams.
+- As of the 2026-06-28 broadcast recheck, M39 includes an ABEMA / DAZN Japan-viewable highlight page because no working SportsNavi/DAZN page was found for that match.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
@@ -298,7 +304,7 @@ Important interpretation:
 - From Round of 16 onward, most matches kick off at 01:00, 02:00, 04:00, 05:00, 06:00, 09:00, or 10:00 JST. Use 07:00, 12:00, and 18:00 JST as the normal cadence; add a 13:30 JST check on days with 09:00 or 10:00 kickoffs.
 - At each run, first apply free data. This now covers final scores and concrete knockout matchup names from ESPN when available.
 - Search highlights only for matches listed by preflight as `highlightGaps`, prioritizing SportsNavi/DAZN. Most SportsNavi highlights have appeared roughly 1-3 hours after full time, so the midday and late-afternoon checks are the most important for user-visible video updates.
-- M39 has repeatedly redirected to `/error/notfound`; do not spend broad search time on it unless a reliable source exposes a new working link.
+- M39 now uses an ABEMA / DAZN highlight. SportsNavi still redirected to `/error/notfound`; do not spend broad search time replacing it unless a working SportsNavi/DAZN page appears.
 
 ## Suggested Next Improvements
 
