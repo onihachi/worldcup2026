@@ -33,10 +33,12 @@
 - `scripts/update-free-data.mjs`
   - Free fallback updater for GitHub Actions.
   - Reads ESPN's public FIFA World Cup scoreboard endpoint and updates final scores by matching kickoff UTC plus teams.
+  - During the knockout stage, propagates known winners/losers into later bracket placeholders as soon as each source match is complete. Partial next-card names are allowed, e.g. `カナダ vs M75勝者`.
   - Applies only curated Japan-viewable highlight links from `data/highlights.json`; local runs check URLs by default, while GitHub Actions skips link checks to avoid DAZN bot/IP blocking.
 - `scripts/preflight-update-needs.mjs`
   - Token-saving preflight for Mac/Codex heartbeat runs.
-  - Prints concise `resultUpdates`, `highlightGaps`, `unsyncedCuratedHighlights`, `inProgress`, and `recommendedAction` lines.
+  - Prints concise `resultUpdates`, `matchupUpdates`, `highlightGaps`, `unsyncedCuratedHighlights`, `inProgress`, and `recommendedAction` lines.
+  - `matchupUpdates` includes both ESPN-provided concrete knockout card names and bracket-derived partial winner/loser propagation.
   - Run this first and only do web/highlight research for listed `highlightGaps` matches.
 - `scripts/validate-page.mjs`
   - Reusable static page validation used locally and in GitHub Actions.
@@ -295,6 +297,8 @@ Important interpretation:
 - As of the 2026-06-27 noon JST update, M65 and M66 include final scores from ESPN, and M61/M62 include SportsNavi/DAZN Japan-viewable highlight pages. No verified M65/M66 highlight had surfaced yet; M39 still redirects to /error/notfound.
 - As of the 2026-06-28 knockout update, M73-M88 Round of 32 placeholders were replaced with confirmed country names from ESPN scheduled fixtures, keeping the ESPN home team on the left to preserve bracket order. M76 is now marked as a Japan match. M63-M72 include SportsNavi/DAZN Japan-viewable highlight pages. `update-free-data.mjs` can now apply future knockout matchup name updates when ESPN replaces winner placeholders with concrete teams.
 - As of the 2026-06-28 broadcast recheck, M39 includes an ABEMA / DAZN Japan-viewable highlight page because no working SportsNavi/DAZN page was found for that match.
+- As of the 2026-06-29 7:00 JST update, M73 South Africa vs Canada includes the final score from ESPN, and M90 is partially resolved to `カナダ vs M75勝者`. No verified SportsNavi/DAZN, DAZN Japan, or DAZN Japan YouTube highlight had surfaced yet for M73.
+- As of the 2026-06-29 7:00 JST script update, knockout bracket propagation no longer waits for ESPN to publish a fully concrete next fixture. When a source match is complete, the updater can replace only the known side of future fixtures and leave the other side as `Mxx勝者` or `Mxx敗者`.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 

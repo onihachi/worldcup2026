@@ -4,6 +4,8 @@ import {
   SCOREBOARD_URL,
   eventCandidatesByKickoff,
   eventForMatch,
+  outcomeFromEvent,
+  resolvedBracketMatchName,
   scheduledMatchNameFromEvent,
   scoreFromEventForMatch,
 } from './scoreboard-matching.mjs';
@@ -141,6 +143,7 @@ const curatedHighlights = await loadCuratedHighlights();
 
 const updates = [];
 const missingEvents = [];
+const outcomesByMatchNo = {};
 
 for (const match of nextMatches) {
   const event = eventForMatch(match, eventsByKickoff);
@@ -159,6 +162,11 @@ for (const match of nextMatches) {
     }
   }
 
+  const outcome = outcomeFromEvent(event);
+  if (match.stage !== 'グループステージ' && outcome) {
+    outcomesByMatchNo[match.no] = outcome;
+  }
+
   const score = scoreFromEventForMatch(match, event);
   if (score && details[match.no]?.result?.score !== score) {
     details[match.no] = {
@@ -166,6 +174,17 @@ for (const match of nextMatches) {
       result: { score },
     };
     updates.push(`M${match.no} result ${score}`);
+  }
+}
+
+for (const match of nextMatches) {
+  if (match.stage === 'グループステージ') continue;
+  const resolvedMatchName = resolvedBracketMatchName(match, outcomesByMatchNo);
+  if (resolvedMatchName && match.match !== resolvedMatchName) {
+    match.match = resolvedMatchName;
+    match.isJapan = resolvedMatchName.includes('日本');
+    updateSearchIndex(match);
+    updates.push(`M${match.no} matchup ${resolvedMatchName}`);
   }
 }
 

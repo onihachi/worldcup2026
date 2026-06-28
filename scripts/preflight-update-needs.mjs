@@ -4,6 +4,8 @@ import {
   SCOREBOARD_URL,
   eventCandidatesByKickoff,
   eventForMatch,
+  outcomeFromEvent,
+  resolvedBracketMatchName,
   scheduledMatchNameFromEvent,
   scoreFromEventForMatch,
 } from './scoreboard-matching.mjs';
@@ -47,6 +49,16 @@ const matchupUpdates = [];
 const highlightGaps = [];
 const inProgress = [];
 const unsyncedCuratedHighlights = [];
+const outcomesByMatchNo = {};
+const seenMatchupUpdates = new Set();
+
+function addMatchupUpdate(match, nextMatchName) {
+  if (!nextMatchName || match.match === nextMatchName) return;
+  const key = `${match.no}:${nextMatchName}`;
+  if (seenMatchupUpdates.has(key)) return;
+  seenMatchupUpdates.add(key);
+  matchupUpdates.push(matchLine(match, ` -> ${nextMatchName}`));
+}
 
 for (const match of matches) {
   const event = eventForMatch(match, eventsByKickoff);
@@ -56,12 +68,14 @@ for (const match of matches) {
   const score = scoreFromEventForMatch(match, event);
   const detail = currentDetails[match.no] || {};
   const curatedHighlight = curatedHighlights[String(match.no)]?.highlight;
+  const outcome = outcomeFromEvent(event);
+  if (match.stage !== 'グループステージ' && outcome) {
+    outcomesByMatchNo[match.no] = outcome;
+  }
 
   if (match.stage !== 'グループステージ') {
     const scheduledMatchName = scheduledMatchNameFromEvent(event);
-    if (scheduledMatchName && match.match !== scheduledMatchName) {
-      matchupUpdates.push(matchLine(match, ` -> ${scheduledMatchName}`));
-    }
+    addMatchupUpdate(match, scheduledMatchName);
   }
 
   if (score && detail.result?.score !== score) {
@@ -79,6 +93,12 @@ for (const match of matches) {
   if (status && !status.completed && ['STATUS_IN_PROGRESS', 'STATUS_FIRST_HALF', 'STATUS_HALFTIME', 'STATUS_SECOND_HALF'].includes(status.name)) {
     inProgress.push(matchLine(match, ` (${status.shortDetail || status.name})`));
   }
+}
+
+for (const match of matches) {
+  if (match.stage === 'グループステージ') continue;
+  const resolvedMatchName = resolvedBracketMatchName(match, outcomesByMatchNo);
+  addMatchupUpdate(match, resolvedMatchName);
 }
 
 console.log('Preflight update needs');

@@ -59,6 +59,30 @@ for (const [siteTeam, aliases] of Object.entries(TEAM_NAME_ALIASES)) {
   }
 }
 
+const KNOCKOUT_BRACKET_SLOTS = {
+  89: [{ matchNo: 74, outcome: 'winner' }, { matchNo: 77, outcome: 'winner' }],
+  90: [{ matchNo: 73, outcome: 'winner' }, { matchNo: 75, outcome: 'winner' }],
+  91: [{ matchNo: 76, outcome: 'winner' }, { matchNo: 78, outcome: 'winner' }],
+  92: [{ matchNo: 79, outcome: 'winner' }, { matchNo: 80, outcome: 'winner' }],
+  93: [{ matchNo: 83, outcome: 'winner' }, { matchNo: 84, outcome: 'winner' }],
+  94: [{ matchNo: 81, outcome: 'winner' }, { matchNo: 82, outcome: 'winner' }],
+  95: [{ matchNo: 86, outcome: 'winner' }, { matchNo: 88, outcome: 'winner' }],
+  96: [{ matchNo: 85, outcome: 'winner' }, { matchNo: 87, outcome: 'winner' }],
+  97: [{ matchNo: 89, outcome: 'winner' }, { matchNo: 90, outcome: 'winner' }],
+  98: [{ matchNo: 93, outcome: 'winner' }, { matchNo: 94, outcome: 'winner' }],
+  99: [{ matchNo: 91, outcome: 'winner' }, { matchNo: 92, outcome: 'winner' }],
+  100: [{ matchNo: 95, outcome: 'winner' }, { matchNo: 96, outcome: 'winner' }],
+  101: [{ matchNo: 97, outcome: 'winner' }, { matchNo: 98, outcome: 'winner' }],
+  102: [{ matchNo: 99, outcome: 'winner' }, { matchNo: 100, outcome: 'winner' }],
+  103: [{ matchNo: 101, outcome: 'loser' }, { matchNo: 102, outcome: 'loser' }],
+  104: [{ matchNo: 101, outcome: 'winner' }, { matchNo: 102, outcome: 'winner' }],
+};
+
+const OUTCOME_LABELS = {
+  winner: '勝者',
+  loser: '敗者',
+};
+
 export function normalizeTeamName(value) {
   return String(value || '')
     .normalize('NFD')
@@ -137,6 +161,49 @@ export function scheduledMatchNameFromEvent(event) {
   const awayName = concreteSiteTeamNameForCompetitor(away);
   if (!homeName || !awayName) return null;
   return `${homeName} vs ${awayName}`;
+}
+
+function numericScore(competitor) {
+  if (competitor?.score == null || competitor.score === '') return null;
+  const value = Number(competitor.score);
+  return Number.isFinite(value) ? value : null;
+}
+
+export function outcomeFromEvent(event) {
+  if (!event?.status?.type?.completed) return null;
+
+  const competitors = eventCompetitors(event);
+  const winnerByFlag = competitors.find((competitor) => competitor.winner === true);
+  if (winnerByFlag) {
+    const loserByFlag = competitors.find((competitor) => competitor !== winnerByFlag && competitor.winner === false);
+    const winner = siteTeamNameForCompetitor(winnerByFlag);
+    const loser = loserByFlag ? siteTeamNameForCompetitor(loserByFlag) : null;
+    if (winner) return { winner, loser };
+  }
+
+  if (competitors.length !== 2) return null;
+  const [first, second] = competitors;
+  const firstScore = numericScore(first);
+  const secondScore = numericScore(second);
+  if (firstScore == null || secondScore == null || firstScore === secondScore) return null;
+
+  const winnerCompetitor = firstScore > secondScore ? first : second;
+  const loserCompetitor = firstScore > secondScore ? second : first;
+  const winner = siteTeamNameForCompetitor(winnerCompetitor);
+  const loser = siteTeamNameForCompetitor(loserCompetitor);
+  return winner ? { winner, loser } : null;
+}
+
+export function resolvedBracketMatchName(match, outcomesByMatchNo) {
+  const slots = KNOCKOUT_BRACKET_SLOTS[match.no];
+  if (!slots) return null;
+
+  const hasKnownOutcome = slots.some((slot) => outcomesByMatchNo[slot.matchNo]?.[slot.outcome]);
+  if (!hasKnownOutcome && !/M\d+(?:勝者|敗者)/.test(match.match)) return null;
+
+  return slots
+    .map((slot) => outcomesByMatchNo[slot.matchNo]?.[slot.outcome] || `M${slot.matchNo}${OUTCOME_LABELS[slot.outcome]}`)
+    .join(' vs ');
 }
 
 function competitorForSiteTeam(event, siteTeam) {
