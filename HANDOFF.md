@@ -235,6 +235,7 @@ Research used for the original page:
   - https://sports.yahoo.co.jp/video/player/26716671
   - https://sports.yahoo.co.jp/video/player/26718471
   - https://sports.yahoo.co.jp/video/player/26718591
+  - https://sports.yahoo.co.jp/video/player/26727129
 - DAZN Japan YouTube highlight pages:
   - https://www.youtube.com/watch?v=WKj3oYyMnPs
   - https://www.youtube.com/watch?v=-4YQtF10DKI
@@ -299,6 +300,7 @@ Important interpretation:
 - As of the 2026-06-28 broadcast recheck, M39 includes an ABEMA / DAZN Japan-viewable highlight page because no working SportsNavi/DAZN page was found for that match.
 - As of the 2026-06-29 7:00 JST update, M73 South Africa vs Canada includes the final score from ESPN, and M90 is partially resolved to `カナダ vs M75勝者`. No verified SportsNavi/DAZN, DAZN Japan, or DAZN Japan YouTube highlight had surfaced yet for M73.
 - As of the 2026-06-29 7:00 JST script update, knockout bracket propagation no longer waits for ESPN to publish a fully concrete next fixture. When a source match is complete, the updater can replace only the known side of future fixtures and leave the other side as `Mxx勝者` or `Mxx敗者`.
+- As of the 2026-06-29 10:00 JST update, M73 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
