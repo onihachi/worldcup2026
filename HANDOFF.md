@@ -238,6 +238,7 @@ Research used for the original page:
   - https://sports.yahoo.co.jp/video/player/26727129
   - https://sports.yahoo.co.jp/video/player/26741319
   - https://sports.yahoo.co.jp/video/player/26742357
+  - https://sports.yahoo.co.jp/video/player/26745543
 - DAZN Japan YouTube highlight pages:
   - https://www.youtube.com/watch?v=WKj3oYyMnPs
   - https://www.youtube.com/watch?v=-4YQtF10DKI
@@ -304,6 +305,7 @@ Important interpretation:
 - As of the 2026-06-29 7:00 JST script update, knockout bracket propagation no longer waits for ESPN to publish a fully concrete next fixture. When a source match is complete, the updater can replace only the known side of future fixtures and leave the other side as `Mxx勝者` or `Mxx敗者`.
 - As of the 2026-06-29 10:00 JST update, M73 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-06-30 7:00 JST update, M74 includes the final score with penalties `1 - 1 (PK 3 - 4)`, M89 is already partially resolved to `パラグアイ vs M77勝者`, and M74/M76 include SportsNavi/DAZN Japan-viewable highlight pages. M75 was still in progress.
+- As of the 2026-06-30 13:00 JST update, M75 includes the final score with penalties `1 - 1 (PK 2 - 3)`, M90 is resolved to `カナダ vs モロッコ`, and M75 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
