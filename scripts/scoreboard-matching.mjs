@@ -169,6 +169,12 @@ function numericScore(competitor) {
   return Number.isFinite(value) ? value : null;
 }
 
+function scoreWithShootout(firstCompetitor, secondCompetitor) {
+  const score = `${firstCompetitor.score} - ${secondCompetitor.score}`;
+  if (firstCompetitor.shootoutScore == null || secondCompetitor.shootoutScore == null) return score;
+  return `${score} (PK ${firstCompetitor.shootoutScore} - ${secondCompetitor.shootoutScore})`;
+}
+
 export function outcomeFromEvent(event) {
   if (!event?.status?.type?.completed) return null;
 
@@ -263,14 +269,14 @@ export function scoreFromEventForMatch(match, event) {
   const firstCompetitor = competitorForSiteTeam(event, firstTeam);
   const secondCompetitor = competitorForSiteTeam(event, secondTeam);
   if (firstCompetitor?.score != null && secondCompetitor?.score != null) {
-    return `${firstCompetitor.score} - ${secondCompetitor.score}`;
+    return scoreWithShootout(firstCompetitor, secondCompetitor);
   }
 
   const competitors = eventCompetitors(event);
   const home = competitors.find((competitor) => competitor.homeAway === 'home');
   const away = competitors.find((competitor) => competitor.homeAway === 'away');
   if (!home || !away || home.score == null || away.score == null) return null;
-  return `${home.score} - ${away.score}`;
+  return scoreWithShootout(home, away);
 }
 
 export function describeEvent(event) {
