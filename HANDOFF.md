@@ -309,6 +309,7 @@ Important interpretation:
 - As of the 2026-06-30 7:00 JST update, M74 includes the final score with penalties `1 - 1 (PK 3 - 4)`, M89 is already partially resolved to `パラグアイ vs M77勝者`, and M74/M76 include SportsNavi/DAZN Japan-viewable highlight pages. M75 was still in progress.
 - As of the 2026-06-30 13:00 JST update, M75 includes the final score with penalties `1 - 1 (PK 2 - 3)`, M90 is resolved to `カナダ vs モロッコ`, and M75 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-07-01 7:00 JST update, M77 and M78 include final scores from ESPN, M89/M91 are resolved to `パラグアイ vs フランス` and `ブラジル vs ノルウェー`, and M77/M78 include SportsNavi/DAZN Japan-viewable highlight pages.
+- As of the 2026-07-02 7:00 JST update, M80 includes the final score `2 - 1` from ESPN, and M92 is partially resolved to `M79勝者 vs イングランド`. No verified M80 SportsNavi/DAZN highlight had surfaced yet. The updater still reported ESPN event 79 as unmatched, so M79 should be rechecked in the next run.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
