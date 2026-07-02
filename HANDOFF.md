@@ -241,6 +241,8 @@ Research used for the original page:
   - https://sports.yahoo.co.jp/video/player/26745543
   - https://sports.yahoo.co.jp/video/player/26757180
   - https://sports.yahoo.co.jp/video/player/26757879
+  - https://sports.yahoo.co.jp/video/player/26775591
+  - https://sports.yahoo.co.jp/video/player/26775948
 - DAZN Japan YouTube highlight pages:
   - https://www.youtube.com/watch?v=WKj3oYyMnPs
   - https://www.youtube.com/watch?v=-4YQtF10DKI
@@ -310,6 +312,7 @@ Important interpretation:
 - As of the 2026-06-30 13:00 JST update, M75 includes the final score with penalties `1 - 1 (PK 2 - 3)`, M90 is resolved to `カナダ vs モロッコ`, and M75 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-07-01 7:00 JST update, M77 and M78 include final scores from ESPN, M89/M91 are resolved to `パラグアイ vs フランス` and `ブラジル vs ノルウェー`, and M77/M78 include SportsNavi/DAZN Japan-viewable highlight pages.
 - As of the 2026-07-02 7:00 JST update, M80 includes the final score `2 - 1` from ESPN, and M92 is partially resolved to `M79勝者 vs イングランド`. No verified M80 SportsNavi/DAZN highlight had surfaced yet. The updater still reported ESPN event 79 as unmatched, so M79 should be rechecked in the next run.
+- As of the 2026-07-02 10:00 JST update, M82 includes the final score `3 - 2`, M92 is resolved to `メキシコ vs イングランド`, M94 is partially resolved to `M81勝者 vs ベルギー`, and M80/M82 include SportsNavi/DAZN Japan-viewable highlight pages. `resolvedBracketMatchName` now preserves concrete scheduled teams that ESPN already supplied instead of replacing them with a placeholder when only the opposite source match outcome is missing.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
@@ -317,7 +320,7 @@ Important interpretation:
 
 - Round of 32 has Japanese kickoff clusters at 02:00, 04:00-06:00, 07:00-08:00, 09:00-10:30, and one 12:00 match. The best heartbeat windows are 07:00, 10:30, 13:30, 16:00, and 20:00 JST during 2026-06-29 to 2026-07-04.
 - From Round of 16 onward, most matches kick off at 01:00, 02:00, 04:00, 05:00, 06:00, 09:00, or 10:00 JST. Use 07:00, 12:00, and 18:00 JST as the normal cadence; add a 13:30 JST check on days with 09:00 or 10:00 kickoffs.
-- At each run, first apply free data. This now covers final scores and concrete knockout matchup names from ESPN when available.
+- At each run, first apply free data. This now covers final scores and concrete knockout matchup names from ESPN when available, while preserving already concrete scheduled teams during partial bracket propagation.
 - Search highlights only for matches listed by preflight as `highlightGaps`, prioritizing SportsNavi/DAZN. Most SportsNavi highlights have appeared roughly 1-3 hours after full time, so the midday and late-afternoon checks are the most important for user-visible video updates.
 - M39 now uses an ABEMA / DAZN highlight. SportsNavi still redirected to `/error/notfound`; do not spend broad search time replacing it unless a working SportsNavi/DAZN page appears.
 

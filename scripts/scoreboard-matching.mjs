@@ -207,8 +207,15 @@ export function resolvedBracketMatchName(match, outcomesByMatchNo) {
   const hasKnownOutcome = slots.some((slot) => outcomesByMatchNo[slot.matchNo]?.[slot.outcome]);
   if (!hasKnownOutcome && !/M\d+(?:勝者|敗者)/.test(match.match)) return null;
 
+  const currentTeams = scheduleTeams(match);
   return slots
-    .map((slot) => outcomesByMatchNo[slot.matchNo]?.[slot.outcome] || `M${slot.matchNo}${OUTCOME_LABELS[slot.outcome]}`)
+    .map((slot, index) => {
+      const resolvedTeam = outcomesByMatchNo[slot.matchNo]?.[slot.outcome];
+      const currentTeam = currentTeams[index];
+      if (resolvedTeam) return resolvedTeam;
+      if (currentTeam && !/^M\d+(?:勝者|敗者)$/.test(currentTeam)) return currentTeam;
+      return `M${slot.matchNo}${OUTCOME_LABELS[slot.outcome]}`;
+    })
     .join(' vs ');
 }
 
