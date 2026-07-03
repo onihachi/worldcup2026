@@ -244,6 +244,9 @@ Research used for the original page:
   - https://sports.yahoo.co.jp/video/player/26775591
   - https://sports.yahoo.co.jp/video/player/26778906
   - https://sports.yahoo.co.jp/video/player/26775948
+  - https://sports.yahoo.co.jp/video/player/26791989
+  - https://sports.yahoo.co.jp/video/player/26793444
+  - https://sports.yahoo.co.jp/video/player/26796756
 - DAZN Japan YouTube highlight pages:
   - https://www.youtube.com/watch?v=WKj3oYyMnPs
   - https://www.youtube.com/watch?v=-4YQtF10DKI
@@ -315,6 +318,7 @@ Important interpretation:
 - As of the 2026-07-02 7:00 JST update, M80 includes the final score `2 - 1` from ESPN, and M92 is partially resolved to `M79勝者 vs イングランド`. No verified M80 SportsNavi/DAZN highlight had surfaced yet. The updater still reported ESPN event 79 as unmatched, so M79 should be rechecked in the next run.
 - As of the 2026-07-02 10:00 JST update, M82 includes the final score `3 - 2`, M92 is resolved to `メキシコ vs イングランド`, M94 is partially resolved to `M81勝者 vs ベルギー`, and M80/M82 include SportsNavi/DAZN Japan-viewable highlight pages. `resolvedBracketMatchName` now preserves concrete scheduled teams that ESPN already supplied instead of replacing them with a placeholder when only the opposite source match outcome is missing.
 - As of the 2026-07-02 13:00 JST update, M81 includes the final score `2 - 0`, M94 is resolved to `アメリカ vs ベルギー`, and M81 includes a SportsNavi/DAZN Japan-viewable highlight page.
+- As of the 2026-07-03 update, M83, M84, and M85 include final scores from ESPN. M93 is resolved to `ポルトガル vs スペイン`, M96 is partially resolved to `スイス vs M87勝者`, and M83/M84/M85 include SportsNavi/DAZN Japan-viewable highlight pages.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
