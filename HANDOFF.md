@@ -247,6 +247,7 @@ Research used for the original page:
   - https://sports.yahoo.co.jp/video/player/26791989
   - https://sports.yahoo.co.jp/video/player/26793444
   - https://sports.yahoo.co.jp/video/player/26796756
+  - https://sports.yahoo.co.jp/video/player/26808171
   - https://sports.yahoo.co.jp/video/player/26806740
 - DAZN Japan YouTube highlight pages:
   - https://www.youtube.com/watch?v=WKj3oYyMnPs
@@ -321,6 +322,7 @@ Important interpretation:
 - As of the 2026-07-02 13:00 JST update, M81 includes the final score `2 - 0`, M94 is resolved to `アメリカ vs ベルギー`, and M81 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-07-03 update, M83, M84, and M85 include final scores from ESPN. M93 is resolved to `ポルトガル vs スペイン`, M96 is partially resolved to `スイス vs M87勝者`, and M83/M84/M85 include SportsNavi/DAZN Japan-viewable highlight pages.
 - As of the 2026-07-04 7:00 JST update, M88 includes the final score with penalties `1 - 1 (PK 2 - 4)`, M95 is partially resolved to `M86勝者 vs エジプト`, and M88 includes a SportsNavi/DAZN Japan-viewable highlight page. M86 was in progress during the first preflight.
+- As of the 2026-07-04 10:00 JST update, M86 includes the final score `3 - 2`, M95 is resolved to `アルゼンチン vs エジプト`, and M86 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
