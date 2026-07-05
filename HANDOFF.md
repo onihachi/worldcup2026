@@ -250,7 +250,9 @@ Research used for the original page:
   - https://sports.yahoo.co.jp/video/player/26808171
   - https://sports.yahoo.co.jp/video/player/26810724
   - https://sports.yahoo.co.jp/video/player/26806740
+  - https://sports.yahoo.co.jp/video/player/26819172
   - https://sports.yahoo.co.jp/video/player/26818956
+  - https://sports.yahoo.co.jp/video/player/26832534
 - DAZN Japan YouTube highlight pages:
   - https://www.youtube.com/watch?v=WKj3oYyMnPs
   - https://www.youtube.com/watch?v=-4YQtF10DKI
@@ -326,6 +328,7 @@ Important interpretation:
 - As of the 2026-07-04 7:00 JST update, M88 includes the final score with penalties `1 - 1 (PK 2 - 4)`, M95 is partially resolved to `M86勝者 vs エジプト`, and M88 includes a SportsNavi/DAZN Japan-viewable highlight page. M86 was in progress during the first preflight.
 - As of the 2026-07-04 10:00 JST update, M86 includes the final score `3 - 2`, M95 is resolved to `アルゼンチン vs エジプト`, and M86 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-07-05 early update, M89 and M90 include final scores from ESPN, M97 is resolved to `フランス vs モロッコ`, and M87/M90 include SportsNavi/DAZN Japan-viewable highlight pages. No verified M89 SportsNavi/DAZN highlight had surfaced yet.
+- As of the 2026-07-06 7:00 JST update, M91 includes the final score `1 - 2`, M99 is partially resolved to `ノルウェー vs M92勝者`, and M89/M91 include SportsNavi/DAZN Japan-viewable highlight pages. ESPN still reported no matched event for M92 during this run.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
