@@ -333,6 +333,7 @@ Important interpretation:
 - As of the 2026-07-07 7:00 JST update, M93 includes the final score `0 - 1`, M98 is partially resolved to `スペイン vs M94勝者`, and M93 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-07-07 10:00 JST update, M94 includes the final score `1 - 4`, M98 is resolved to `スペイン vs ベルギー`, and M94 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-07-08 7:00 JST update, M95 includes the final score `3 - 2`, and M100 is partially resolved to `アルゼンチン vs M96勝者`. No verified SportsNavi/DAZN, DAZN Japan, or DAZN Japan YouTube highlight had surfaced yet for M95.
+- As of the 2026-07-08 10:00 JST update, M96 includes the final score with penalties `0 - 0 (PK 4 - 3)`, M100 is resolved to `アルゼンチン vs スイス`, and M95/M96 include SportsNavi/DAZN Japan-viewable highlight pages.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
