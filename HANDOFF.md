@@ -337,6 +337,7 @@ Important interpretation:
 - As of the 2026-07-10 7:00 JST update, M97 includes the final score `2 - 0`, and M101 is partially resolved to `フランス vs M98勝者`. No verified SportsNavi/DAZN, DAZN Japan, or DAZN Japan YouTube highlight had surfaced yet for M97.
 - As of the 2026-07-10 10:00 JST update, M97 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-07-11 7:00 JST update, M98 includes the final score `2 - 1`, and M101 is resolved to `フランス vs スペイン`. No verified SportsNavi/DAZN, DAZN Japan, or DAZN Japan YouTube highlight had surfaced yet for M98.
+- As of the 2026-07-11 10:00 JST update, M98 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
