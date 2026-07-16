@@ -792,6 +792,14 @@
         "url": "https://sports.yahoo.co.jp/video/player/26970507",
         "thumbnail": "https://yvpub-pctr.c.yimg.jp/dk/yvpub-bucket001-west/contents/yvpub-content-b16583bb7d46945b4da760ca63f79f19/images/4343fb6b-63f6-4c76-90f4-7c6da7854c93.jpg"
       }
+    },
+    "102": {
+      "highlight": {
+        "title": "ハイライトを見る",
+        "provider": "スポーツナビ / DAZN",
+        "url": "https://sports.yahoo.co.jp/video/player/26987214",
+        "thumbnail": "https://yvpub-pctr.c.yimg.jp/dk/yvpub-bucket001-west/contents/yvpub-content-b16583bb7d46945b4da760ca63f79f19/images/a4b5ca82-581c-4623-b43b-1bb73bfd2277.jpg"
+      }
     }
   }
 }

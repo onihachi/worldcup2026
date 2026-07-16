@@ -341,6 +341,7 @@ Important interpretation:
 - As of the 2026-07-12 13:00 JST update, M99 includes the final score `1 - 2` and a SportsNavi/DAZN Japan-viewable highlight page, M100 includes the final score `3 - 1`, and M102 is resolved to `イングランド vs アルゼンチン`. No verified SportsNavi/DAZN, DAZN Japan, or DAZN Japan YouTube highlight had surfaced yet for M100.
 - As of the 2026-07-12 20:00 JST update, M100 includes a SportsNavi/DAZN Japan-viewable highlight page.
 - As of the 2026-07-15 7:00 JST update, M101 includes the final score `0 - 2` and a SportsNavi/DAZN Japan-viewable highlight page, M103 is partially resolved to `フランス vs M102敗者`, and M104 is partially resolved to `スペイン vs M102勝者`.
+- As of the 2026-07-15 20:00 JST update, M102 includes the final score `1 - 2` and a SportsNavi/DAZN Japan-viewable highlight page, M103 is resolved to `フランス vs イングランド`, and M104 is resolved to `スペイン vs アルゼンチン`.
 - FOX Sports YouTube highlights were removed from the cards because they were not viewable in Japan. Prefer DAZN Japan highlight pages or DAZN Japan YouTube videos for this site. Use other YouTube/rightsholder clips only after confirming Japan availability.
 - Keep `data/highlights.json` in sync with newly verified highlight links so the free GitHub fallback can reapply them safely.
 
